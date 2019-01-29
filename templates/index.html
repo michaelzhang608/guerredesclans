@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!--fontawesome icons-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        <!--SVG.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.6/svg.js"></script>
+
+        <!--Link to css file-->
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='font.css') }}" rel="stylesheet">
+
+        <!--Link to javascript-->
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+        <script src="{{ url_for('static', filename='sha.min.js') }}"></script>
+
+        <!--Link to CountUp-->
+        <script src="{{ url_for('static', filename='countUp.js') }}"></script>
+
+        <!--Jquery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+        <title>Guerre Des Clans</title>
+
+    </head>
+    <body>
+      <br>
+      <div id="all" class="container-fluid text-center">
+
+        <div id="main_div">
+          <div class="row">
+            <div class="col">
+              <h6 class="info">7e et 10e</h6>
+              <h4 class="clan poseidon">Poséidon:</h4>
+              <h2 id="poseidon" class="counter">0</h2>
+            </div>
+            <div class="col">
+              <h6 class="info">8e et 11e</h6>
+              <h4 class="clan ulysse">Ulysse:</h4>
+              <h2 id="ulysse" class="counter">0</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6 class="info">9e et 12e</h6>
+              <h4 class="clan hydra">Hydra:</h4>
+              <h2 id="hydra" class="counter">0</h2>
+            </div>
+          </div>
+          <div id="drawing"></div>
+          <br>
+          <a id="add_points_link" class="btn btn-light"><i class="fas fa-sort-amount-up"></i> Ajouter des points</a>
+        </div>
+
+        <div id="add_points_div" class="text-center">
+          <div class="alert alert-danger" id="alert"></div>
+          <a id="main_link" href="#">Retourne</a>
+          <br>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ajouter des Points</h5>
+              <h6 class="card-subtitle">Formulaire de soumission</h6>
+              <br>
+              <form id="add_points_form" action="/update_points" method="post">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Clan:</span>
+                  </div>
+                  <select name="clan" class="form-control" id="points_clan" required>
+                    <option value="" disabled selected>Sélectionnez votre clan</option>
+                    <option value="P">Poséidon</option>
+                    <option value="H">Hydra</option>
+                    <option value="U">Ulysse</option>
+                  </select>
+                <input name="points" type="number" class="form-control" id="points_amount" min="1" placeholder="Nombre de points" required>
+                </div>
+                <br>
+                <input name="password" type="password" class="form-control" id="points_password" placeholder="Code Secret" required>
+                <br>
+                <button class="btn btn-info" type="submit">Ajouter</button>
+              </form>
+            </div>
+          </div>
+          <footer>
+              <a href="https://pierre-savard.ecolecatholique.ca/">GDE Pierre-Savard</a>
+              <br>
+              <p>Créé par Michael Zhang</p>
+          </footer>
+
+        </div>
+      <div id="hide">
+        {% for point in points %}
+          <p data-clan="{{ point[0] }}" data-points="{{ point[1][0] }}" data-percent="{{ point[1][1] }}"></p>
+        {% endfor %}
+      </div>
+    </body>
+</html>
