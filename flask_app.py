@@ -27,7 +27,7 @@ def get_points(clan=None):
     if is_production():
         f = read_csv('assets/db.csv')
     else:
-        f = read_csv('static/db.csv')
+        f = read_csv('/static/db.csv')
     m = max([int(i[1]) for i in f])
     # Compute percents
     out = {k: (int(v), round(100 * int(v) / m)) for k, v in f}
@@ -38,9 +38,9 @@ def get_points(clan=None):
 
 def add_points(change, password):
 
-    pass_location = 'static/password.txt'
-    log_location = 'static/log.csv'
-    db_location = 'static/db.csv'
+    pass_location = '/static/password.txt'
+    log_location = '/static/log.csv'
+    db_location = '/static/db.csv'
 
     if is_production():
         pass_location = 'assets/password.txt'
