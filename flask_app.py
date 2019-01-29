@@ -48,5 +48,5 @@ def add_points(change, password):
 
 if __name__ == "__main__":
     os.environ["FLASK_APP"] = "flask_app.py"
-    
+    # LOCAL FILE
     os.system("flask run")
