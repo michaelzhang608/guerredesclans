@@ -1,18 +1,64 @@
-footer {
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    color: black;
-    font-size: 20px;
+@import url("https://fonts.googleapis.com/css?family=Monoton");
+
+body {
+  background: black;
+  transition: background-color ease-in 0.5s;
+}
+
+@media (max-width: 800px) {
+
+  
+
+}
+
+.info {
+  color: grey;
+}
+
+.counter {
+  color: white;
+  font-size: 4vw;
+}
+
+.clan {
+  font-family: "Monoton", Helvetica, sans-serif;
+  letter-spacing: 5px;
+  display: inline;
+  font-size: 6vw;
+  text-transform: uppercase;
+}
+
+@supports (-webkit-background-clip: text) {
+  .poseidon {
+    color: transparent;
+    background: linear-gradient(7deg, #72B9DA 50%, #21A2DF 0);
+    -webkit-background-clip: text;
+  }
+}
+
+@supports (-webkit-background-clip: text) {
+  .hydra {
+    color: transparent;
+    background: linear-gradient(7deg, #10e8a0 50%, #168F66 0);
+    -webkit-background-clip: text;
+  }
+}
+
+@supports (-webkit-background-clip: text) {
+  .ulysse {
+    color: transparent;
+    background: linear-gradient(7deg, #F9E6A1 50%, #FFD532 0);
+    -webkit-background-clip: text;
+  }
+}
+
+#add_points_link {
+  background-color: lightgray;
 }
 
 #bottom {
   display: none;
-}
-
-footer > p {
-  display: inline;
+  margin-top: 1000px
 }
 
 #prompt_div {
@@ -44,4 +90,17 @@ footer > p {
 #hide, #add_points_div
 {
   display: none;
+}
+
+footer {
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    color: black;
+    font-size: 20px;
+}
+
+footer > p {
+  display: inline;
 }
