@@ -23,7 +23,7 @@ def add_points():
 def get_points(clan=None):
     # Get points
     if is_production():
-        f = read_csv('/static/db.csv')
+        f = read_csv('/home/guerredesclans/mysite/db.csv')
     else:
         f = read_csv('db.csv')
 
@@ -42,9 +42,9 @@ def add_points(change, password):
     db_location = 'db.csv'
 
     if is_production():
-        pass_location = '/static/password.txt'
-        log_location = '/static/log.csv'
-        db_location = '/how static/db.csv'
+        pass_location = '/home/guerredesclans/mysite/password.txt'
+        log_location = '/home/guerredesclans/mysite/log.csv'
+        db_location = '/home/guerredesclans/mysite/db.csv'
 
     if check_pass(pass_location, password):
         points = [[p[0], p[1][0]] for p in get_points()]
