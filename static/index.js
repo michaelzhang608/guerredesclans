@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Colours for the clans
   const blue_color = '#0B4F6C'
-  const red_color = '#772014'
+  const green_color = '#168F66'
   const yellow_color = '#FFD447'
 
   // If you are trying to get the password, good luck with this sha256 hash!
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     .radius(10)
   var middle_rect = draw.rect("31%")
                       .x(window.innerWidth / 3)
-                      .attr({ fill: red_color })
+                      .attr({ fill: green_color })
                       .flip("y")
                       .dy("-100%")
                       .radius(10)

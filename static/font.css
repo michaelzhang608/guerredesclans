@@ -45,7 +45,7 @@ body {
 @supports (-webkit-background-clip: text) {
   .hydra {
     color: transparent;
-    background: linear-gradient(7deg, #F57968 50%, #F03A1F 0);
+    background: linear-gradient(7deg, #10e8a0 50%, #168F66 0);
     -webkit-background-clip: text;
   }
 }
