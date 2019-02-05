@@ -17,6 +17,7 @@
 
         <!--Link to css file-->
         <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='font.css') }}" rel="stylesheet">
 
         <!--Link to javascript-->
         <script src="{{ url_for('static', filename='index.js') }}"></script>
@@ -35,8 +36,34 @@
     <body>
       <br>
       <div id="all" class="container-fluid text-center">
-
         <div id="main_div">
+          <div class="row">
+            <div class="col">
+              <table class="table table-dark table-striped table-info">
+                <tr>
+                  <td colspan="5">
+                    <h1 id="olympiades_title">Olympiades 2019.</h1>
+                    <p id="olympiades_subtitle">compétition féroce entre-clans du 11 - 15 février</p>
+                  </td>
+
+                </tr>
+                <tr>
+                  <th>Nom</th>
+                  <th>Équipe</th>
+                  <th>Clan</th>
+                  <th>Points</th>
+                  <th>J'aimes</th>
+                </tr>
+                  <td>Les gagnants</td>
+                  <td>Jean, Pierre, Luc</td>
+                  <td>Hydra</td>
+                  <td>234</td>
+                  <td><a href="#">22 likes <i class="fas fa-thumbs-up"></i></a></td>
+                </tr>
+              </table>
+              <br>
+            </div>
+          </div>
           <div class="row">
             <div class="col">
               <h6 class="info">7e et 10e</h6>

@@ -39,13 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     .dy("-100%")
                     .radius(10)
   var middle_rect = draw.rect("31%")
-                      .x(window.innerWidth / 3)
+                      .x(window.innerWidth / 3 - 10)
                       .attr({ fill: green_color })
                       .flip("y")
                       .dy("-100%")
                       .radius(10)
   var right_rect = draw.rect("31%")
-                    .x(2 * window.innerWidth / 3)
+                    .x(2 * window.innerWidth / 3 - 23)
                     .attr({ fill: yellow_color })
                     .flip("y")
                     .dy("-100%")
@@ -109,8 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Calibrate positioning when window is resized
   window.onresize = () => {
-    middle_rect.x(window.innerWidth / 3)
-    right_rect.x(2 * window.innerWidth / 3)
+    middle_rect.x(window.innerWidth / 3 - 10)
+    right_rect.x(2 * window.innerWidth / 3 - 23)
 
     document.querySelector("#main_div").style.height = (window.innerHeight - 180) + "px";
   }

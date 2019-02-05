@@ -11,14 +11,17 @@ app.config['SECRET_KEY'] = 'secret123'
 def index():
     return render_template("index.html", points=get_points())
 
-@app.route("/update_points", methods=["POST"])
+@app.route("/update_points", methods=["GET", "POST"])
 def add_points():
-    points = request.form.get("points")
-    clan = request.form.get("clan")
-    password = request.form.get("password")
-    result = add_points([clan, points], password)
+    if request.method == "POST":
+        points = request.form.get("points")
+        clan = request.form.get("clan")
+        password = request.form.get("password")
+        result = add_points([clan, points], password)
 
-    return render_template("index.html", points=get_points())
+        return render_template("index.html", points=get_points())
+    else:
+        return render_template("index.html", points=get_points())
 
 def get_points(clan=None):
     # Get points
