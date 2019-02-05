@@ -161,4 +161,15 @@ footer > p {
     width: 100%;
   }
 
+  #olympiades_title {
+    font-size: 10vw;
+  }
+  #olympiades_subtitle {
+    letter-spacing: 0px;
+  }
+
+  table {
+    font-size: 4vw;
+  }
+
 }
