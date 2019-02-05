@@ -99,10 +99,6 @@ body {
   letter-spacing: 4.5px;
 }
 
-table {
-  margin: auto;
-}
-
 @-webkit-keyframes shine
 {
     0%
@@ -170,7 +166,7 @@ footer > p {
   }
 
   table {
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
 
 }
