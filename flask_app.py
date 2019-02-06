@@ -44,6 +44,21 @@ def get_teams():
     else:
         return read_csv("teams.csv")
 
+@app.route("/add_points_team", methods=["POST"])
+def add_points_team():
+
+    if is_production():
+        teams_location = "/home/guerredesclans/mysite/teams.csv"
+    else:
+        teams_location = "teams.csv"
+    teams = read_csv(teams_location)
+    for team in teams:
+        if team[0] ==  request.form.get("team"):
+            team[3] = int(team[3]) + 1
+    write_csv(teams_location, teams)
+    return redirect(url_for('index'))
+
+
 def add_points(change, password):
 
     pass_location = 'password.txt'

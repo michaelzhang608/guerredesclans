@@ -50,14 +50,19 @@
                   <th>Équipe</th>
                   <th>Membres</th>
                   <th>Points</th>
-                  <th>J'aimes</th>
+                  <th>Likes</th>
 
                 {% for team in teams %}
                 </tr>
                   <td>{{ team[0] }}</td>
                   <td>{{ team[1] }}</td>
                   <td>{{ team[2] }}</td>
-                  <td><a href="#">{{ team[3] }} likes <i class="fas fa-thumbs-up"></i></a></td>
+                  <td>
+                    <form action="/add_points_team" method="post">
+                      <input type="hidden" name="team" value="{{ team[0] }}">
+                      <button type="submit" class="btn btn-info">{{ team[3] }} likes <i class="fas fa-thumbs-up"></i></button>
+                    </form>
+                  </td>
                 </tr>
                 {% endfor %}
 
