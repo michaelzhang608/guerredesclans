@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'secret123'
 
 @app.route("/")
 def index():
-    return render_template("index.html", points=get_points())
+    return render_template("index.html", points=get_points(), teams=get_teams())
 
 @app.route("/update_points", methods=["GET", "POST"])
 def add_points():
@@ -37,6 +37,12 @@ def get_points(clan=None):
         return [[k, v] for k,v in out.items()]
     else:
         return out[clan]
+
+def get_teams():
+    if is_production():
+        return read_csv("/home/guerredesclans/mysite/teams.csv")
+    else:
+        return read_csv("teams.csv")
 
 def add_points(change, password):
 
