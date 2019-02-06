@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import os
 from utils import check_pass, read_csv, write_csv
 import time
@@ -19,9 +19,9 @@ def add_points():
         password = request.form.get("password")
         result = add_points([clan, points], password)
 
-        return render_template("index.html", points=get_points())
+        return redirect(url_for('index'))
     else:
-        return render_template("index.html", points=get_points())
+        return redirect(url_for('index'))
 
 def get_points(clan=None):
     # Get points
