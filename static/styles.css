@@ -46,6 +46,10 @@ body {
   }
 }
 
+#team_name {
+  font-weight: bold;
+}
+
 #add_points_link {
   background-color: lightgray;
 }
@@ -126,6 +130,10 @@ footer > p {
 
   footer, body, .card-title, .card-subtitle, .input-group-text, .form-control, option {
     font-size: 5vw
+  }
+
+  #team_members {
+    font-size: 2.5vw
   }
 
   #points_clan {
