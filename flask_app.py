@@ -40,9 +40,11 @@ def get_points(clan=None):
 
 def get_teams():
     if is_production():
-        return read_csv("/home/guerredesclans/mysite/teams.csv")
+        teams = read_csv("/home/guerredesclans/mysite/teams.csv")
     else:
-        return read_csv("teams.csv")
+        teams = read_csv("teams.csv")
+    teams.sort(key=lambda x:int(x[3]), reverse=True)
+    return teams
 
 @app.route("/add_points_team", methods=["POST"])
 def add_points_team():
