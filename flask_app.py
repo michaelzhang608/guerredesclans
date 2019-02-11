@@ -56,7 +56,7 @@ def add_points_team():
     teams = read_csv(teams_location)
     for team in teams:
         if team[0] ==  request.form.get("team"):
-            team[3] = int(team[3]) + 1
+            team[4] = int(team[4]) + 1
     write_csv(teams_location, teams)
     return redirect(url_for('index'))
 
