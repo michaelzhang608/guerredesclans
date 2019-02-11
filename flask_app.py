@@ -17,7 +17,7 @@ def add_points():
         points = request.form.get("points")
         clan = request.form.get("clan")
         password = request.form.get("password")
-        result = add_points([clan, points], password)
+        add_points_clan([clan, points], password)
 
         return redirect(url_for('index'))
     else:
@@ -61,7 +61,7 @@ def add_points_team():
     return redirect(url_for('index'))
 
 
-def add_points(change, password):
+def add_points_clan(change, password):
 
     pass_location = 'password.txt'
     log_location = 'log.csv'
