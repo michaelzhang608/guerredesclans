@@ -64,6 +64,19 @@ def add_points_team():
         write_csv(teams_location, teams)
     return redirect(url_for('index'))
 
+def update_points_team(info):
+
+    teams_location = "teams.csv"
+    teams = read_csv(teams_location)
+    for team in teams:
+        if team[0] ==  info[0]:
+            team[3] = info[1]
+    print(f"TEAMS VARIABLE HERE: {teams}")
+    # Catch if teams are empty
+    if teams:
+        write_csv(teams_location, teams)
+    return f"Updated {info[0]} to {info[1]} points"
+
 
 def add_points_clan(change, password):
 
