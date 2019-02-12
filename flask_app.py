@@ -53,12 +53,15 @@ def add_points_team():
         teams_location = "/home/guerredesclans/mysite/teams.csv"
     else:
         teams_location = "teams.csv"
+
     teams = read_csv(teams_location)
     for team in teams:
         if team[0] ==  request.form.get("team"):
             team[4] = int(team[4]) + 1
     print(f"TEAMS VARIABLE HERE: {teams}")
-    write_csv(teams_location, teams)
+    # Catch if teams are empty
+    if teams:
+        write_csv(teams_location, teams)
     return redirect(url_for('index'))
 
 
