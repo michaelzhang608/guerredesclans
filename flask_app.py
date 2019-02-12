@@ -67,7 +67,10 @@ def add_points_team():
 def update_points_team(info):
 
     teams_location = "teams.csv"
-    teams = read_csv(teams_location)
+    try:
+        teams = read_csv(teams_location)
+    except:
+        teams = None
     for team in teams:
         if team[0] ==  info[0]:
             team[3] = info[1]
