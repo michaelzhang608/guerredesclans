@@ -11,8 +11,8 @@ try:
             w = csv.writer(f)
             for line in teams:
                 w.writerow(line)
-        print(f"Succesful backup at: {time}")
+        print(f"Succesful backup at:", time)
     except:
-        print(f"Unsuccesful backup at: {time}")
+        print(f"Unsuccesful backup at:", time)
 except:
     print("read failed")
