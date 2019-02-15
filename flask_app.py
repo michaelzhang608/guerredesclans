@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'secret123'
 
 @app.route("/")
 def index():
-    return render_template("index.html", points=get_points(), teams=get_teams())
+    return render_template("index.html", points=get_points(), teams=get_teams()[3:], winners=get_teams()[:3])
 
 @app.route("/update_points", methods=["GET", "POST"])
 def add_points():
