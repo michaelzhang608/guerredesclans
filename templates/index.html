@@ -24,9 +24,6 @@
         <!--fontawesome icons-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-        <!--SVG.js-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.6/svg.js"></script>
-
         <!--Link to css file-->
         <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 
@@ -34,8 +31,8 @@
         <script src="{{ url_for('static', filename='index.js') }}"></script>
         <script src="{{ url_for('static', filename='sha.min.js') }}"></script>
 
-        <!--Link to CountUp-->
-        <script src="{{ url_for('static', filename='countUp.js') }}"></script>
+        <!-- Link to Chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js" integrity="sha256-qSIshlknROr4J8GMHRlW3fGKrPki733tLq+qeMCR05Q=" crossorigin="anonymous"></script>
 
         <!--Jquery-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -47,85 +44,17 @@
       <br>
       <div id="all" class="container-fluid text-center">
         <div id="main_div">
+          <div class="container">
+            <img src="{{ url_for('static', filename='logoGDE.png') }}" id="logo_gde">
+            <h3 id="olympiades_title">La Guerre des Clans</h3>
+            <canvas id="myChart"></canvas>
+          </div>
+          <br>
+          <br>
           <a id="add_points_link" class="btn btn-light"><i class="fas fa-sort-amount-up"></i> Ajouter des points</a>
           <br>
           <br>
-          <div class="row">
-            <div class="col">
-
-              <!-- Olympiades leaderboard -->
-              <!-- <table class="table table-dark table-striped table-info">
-                <tr>
-                  <td colspan="3">
-                    <h1 id="olympiades_title">Olympiades 2019.</h1>
-                    <p id="olympiades_subtitle">compétition féroce entre-clans du 11 - 15 février</p>
-                  </td>
-                </tr>
-                <tr>
-                  <th>Équipe</th>
-                  <th>Points</th>
-                  <th>Likes</th>
-                {% for team in winners %}
-                </tr>
-                  <td>
-                    <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
-                    <span id="team_members">{{ team[2] }}</span>
-                  </td>
-                  <td>{{ team[3] }}</td>
-                  <td>
-                    <form action="/add_points_team" method="post">
-                      <input type="hidden" name="team" value="{{ team[0] }}">
-                      {{ team[4] }} likes
-                    </form>
-                  </td>
-                </tr>
-                {% endfor %}
-              </table>
-              <br>
-              <br>
-              <table class="table table-dark table-striped table-info">
-                {% for team in teams %}
-                </tr>
-                  <td>
-                    <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
-                    <span id="team_members">{{ team[2] }}</span>
-                  </td>
-                  <td>{{ team[3] }}</td>
-                  <td>
-                    <form action="/add_points_team" method="post">
-                      <input type="hidden" name="team" value="{{ team[0] }}">
-                      {{ team[4] }} likes
-                    </form>
-                  </td>
-                </tr>
-                {% endfor %}
-
-              </table> -->
-              <br>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <h6 class="info">7e et 10e</h6>
-              <h4 class="clan poseidon">Poséidon:</h4>
-              <h2 id="poseidon" class="counter">0</h2>
-            </div>
-            <div class="col">
-              <h6 class="info">8e et 11e</h6>
-              <h4 class="clan ulysse">Ulysse:</h4>
-              <h2 id="ulysse" class="counter">0</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <h6 class="info">9e et 12e</h6>
-              <h4 class="clan hydra">Hydra:</h4>
-              <h2 id="hydra" class="counter">0</h2>
-            </div>
-          </div>
-          <div id="drawing"></div>
         </div>
-
         <div id="add_points_div" class="text-center">
           <div class="alert alert-danger" id="alert"></div>
           <a id="main_link" href="#">Retourne</a>
@@ -143,9 +72,10 @@
                   </div>
                   <select name="clan" class="form-control" id="points_clan" required>
                     <option value="" disabled selected></option>
-                    <option value="P">Poséidon</option>
-                    <option value="H">Hydra</option>
-                    <option value="U">Ulysse</option>
+                    <option value="R">Clan Rouge (7-8)</option>
+                    <option value="B">Clan Blanc (9-10)</option>
+                    <option value="N">Clan Noir (11-12)</option>
+                    <option value="G">Clan Gris (Enseignants)</option>
                   </select>
                 <input name="points" type="number" class="form-control" id="points_amount" min="1" placeholder="Points" required>
                 </div>
@@ -168,7 +98,7 @@
         </div>
       <div id="hide">
         {% for point in points %}
-          <p data-clan="{{ point[0] }}" data-points="{{ point[1][0] }}" data-percent="{{ point[1][1] }}"></p>
+          <p data-clan="{{ point[0] }}" data-points="{{ point[1] }}"></p>
         {% endfor %}
       </div>
     </body>

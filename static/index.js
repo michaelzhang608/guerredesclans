@@ -20,65 +20,74 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Buttons configure
-  $("#add_points_link").click(() => {
-    change_to("#add_points_div")
-    $("body").css("backgroundColor", "white")
+  document.querySelector("#add_points_link").onclick = () => {
+    change_to(document.querySelector("#add_points_div"))
+  }
+
+  document.querySelector("#main_link").onclick = () => {
+    change_to(document.querySelector("#main_div"))
+  }
+
+  var clan_names = {
+    "R": "Clan Rouge (7-8)",
+    "B": "Clan Blanc (9-10)",
+    "N": "Clan Noir (11-12)",
+    "G": "Clan Gris (Enseignants)",
+  }
+
+  var clan_colors = {
+    "R": 'rgba(255, 56, 56, 0.8)',
+    "B": 'rgba(242, 242, 242, 0.8)',
+    "N": 'rgba(31, 31, 31, 0.8)',
+    "G": 'rgba(115, 115, 115, 0.8)',
+  }
+
+  var labels = []
+  var colors = []
+  var data = []
+
+  $("#hide").children().each((i, obj) => {
+    labels.push(clan_names[obj.dataset.clan])
+    colors.push(clan_colors[obj.dataset.clan])
+    data.push(obj.dataset.points)
   })
-  $("#main_link").click(() => {
-    change_to("#main_div")
-    $("body").css("backgroundColor", "black")
-  })
-
-  // Create drawing instance
-  let draw = SVG('drawing');
-  // Add chart bars
-  var left_rect = draw.rect("31%")
-                    .attr({ fill: blue_color })
-                    .flip("y")
-                    .dy("-100%")
-                    .radius(10)
-  var middle_rect = draw.rect("31%")
-                      .x(window.innerWidth / 3 - 10)
-                      .attr({ fill: green_color })
-                      .flip("y")
-                      .dy("-100%")
-                      .radius(10)
-  var right_rect = draw.rect("31%")
-                    .x(2 * window.innerWidth / 3 - 23)
-                    .attr({ fill: yellow_color })
-                    .flip("y")
-                    .dy("-100%")
-                    .radius(10)
-  var clan_id = {
-    "P": "poseidon",
-    "H": "hydra",
-    "U": "ulysse"
-  }
-  var rect_id = {
-    "P": left_rect,
-    "H": middle_rect,
-    "U": right_rect
-  }
-
-  // Initial setup
-  children = document.querySelector("#hide").children
-  var points = []
-  for (let i = 0; i < children.length; i++) {
-    clan = children[i].dataset["clan"]
-    points = [children[i].dataset["points"], children[i].dataset["percent"]]
-    update_points(clan, points, text_update=true)
-  }
-  // Make initial transition smooth
-  $("#drawing").animate({ opacity: 1 }, 500)
-
-  // Number counting up options
-  var options = {
-    useEasing: true,
-    useGrouping: true,
-    separator: ',',
-    decimal: '.',
-  }
+  // Create chart
+  var chart = document.querySelector("#myChart")
+  var myChart = new Chart(chart, {
+      type: 'bar',
+      data: {
+          labels: labels,
+          datasets: [
+            {
+              backgroundColor: colors,
+              data: data,
+              borderWidth: 3,
+          }
+        ]
+      },
+      options: {
+          legend: {
+            display: false,
+          },
+          scales: {
+              xAxes: [{
+                ticks: {
+                    fontSize: 15,
+                }
+              }],
+              yAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Points'
+                },
+                ticks: {
+                    fontSize: 13,
+                    beginAtZero: true
+                }
+              }]
+          }
+      }
+  });
 
   document.querySelector("#add_points_form").onsubmit = () => {
     if (sha256(document.querySelector("#points_password").value) != password_hashed) {
@@ -86,32 +95,5 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelector("#alert").style.display = "block"
       return false
     }
-  }
-
-  function update_points(id, number, text_update) {
-    if (text_update) {
-      // Update number
-      current = document.querySelector("#" + clan_id[id]).innerHTML
-      current = parseInt(current.replace(',',''))
-      var count = new CountUp(clan_id[id], current, number[0], 0, 2.5, options)
-      if (!count.error) {
-        count.start()
-      } else {
-        console.error(count.error)
-      }
-    }
-    // Update rect
-    rect_id[id].animate().height(number[1] + '%')
-  }
-
-  // Initial window calibration
-  document.querySelector("#main_div").style.height = (window.innerHeight - 180) + "px";
-
-  // Calibrate positioning when window is resized
-  window.onresize = () => {
-    middle_rect.x(window.innerWidth / 3 - 10)
-    right_rect.x(2 * window.innerWidth / 3 - 23)
-
-    document.querySelector("#main_div").style.height = (window.innerHeight - 180) + "px";
   }
 })

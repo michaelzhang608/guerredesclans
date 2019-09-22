@@ -3,13 +3,14 @@ import os
 from utils import check_pass, read_csv, write_csv
 import time
 from datetime import datetime
+import subprocess
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret123'
 
 @app.route("/")
 def index():
-    return render_template("index.html", points=get_points(), teams=get_teams()[3:], winners=get_teams()[:3])
+    return render_template("index.html", points=get_points())
 
 @app.route("/update_points", methods=["GET", "POST"])
 def add_points():
@@ -31,55 +32,7 @@ def get_points(clan=None):
         f = read_csv('db.csv')
 
     # Compute percents
-    m = max([int(i[1]) for i in f])
-    out = {k: (int(v), round(100 * int(v) / m)) for k, v in f}
-    if not clan:
-        return [[k, v] for k,v in out.items()]
-    else:
-        return out[clan]
-
-def get_teams():
-    if is_production():
-        teams = read_csv("/home/guerredesclans/mysite/teams.csv")
-    else:
-        teams = read_csv("teams.csv")
-    teams.sort(key=lambda x:int(x[3]), reverse=True)
-    return teams
-
-@app.route("/add_points_team", methods=["POST"])
-def add_points_team():
-
-    if is_production():
-        teams_location = "/home/guerredesclans/mysite/teams.csv"
-    else:
-        teams_location = "teams.csv"
-
-    teams = read_csv(teams_location)
-    for team in teams:
-        if team[0] ==  request.form.get("team"):
-            team[4] = int(team[4]) + 1
-    print(f"TEAMS VARIABLE HERE: {teams}")
-    # Catch if teams are empty
-    if teams:
-        write_csv(teams_location, teams)
-    return redirect(url_for('index'))
-
-def update_points_team(info):
-
-    teams_location = "teams.csv"
-    try:
-        teams = read_csv(teams_location)
-    except:
-        teams = None
-    for team in teams:
-        if team[0] ==  info[0]:
-            team[3] = info[1]
-    print(f"TEAMS VARIABLE HERE: {teams}")
-    # Catch if teams are empty
-    if teams:
-        write_csv(teams_location, teams)
-    return f"Updated {info[0]} to {info[1]} points"
-
+    return f
 
 def add_points_clan(change, password):
 
@@ -93,10 +46,13 @@ def add_points_clan(change, password):
         db_location = '/home/guerredesclans/mysite/db.csv'
 
     if check_pass(pass_location, password):
-        points = [[p[0], p[1][0]] for p in get_points()]
+        points = get_points()
         for p in points:
             if p[0] == change[0]:
-                p[1] = p[1] + int(change[1])
+                print(type(p[1]))
+                print(type(change[1]))
+
+                p[1] = int(p[1]) + int(change[1])
 
         # Log update
         log = read_csv(log_location)
@@ -128,4 +84,11 @@ def is_production():
 
 if __name__ == "__main__":
     os.environ["FLASK_APP"] = "flask_app.py"
+    try:
+        current = subprocess.check_output(["lsof", "-t", "-i:5000"])
+        current = max(current.decode("utf-8").split("\n"))
+        print(f"kill {current}")
+        os.system(f"kill {current}")
+    except Exception as e:
+        print(e)
     os.system("flask run")

@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Monoton");
 
 body {
-  background: black;
   transition: background-color ease-in 0.5s;
 }
 
@@ -20,30 +19,6 @@ body {
   display: inline;
   font-size: 6vw;
   text-transform: uppercase;
-}
-
-@supports (-webkit-background-clip: text) {
-  .poseidon {
-    color: transparent;
-    background: linear-gradient(7deg, #72B9DA 50%, #21A2DF 0);
-    -webkit-background-clip: text;
-  }
-}
-
-@supports (-webkit-background-clip: text) {
-  .hydra {
-    color: transparent;
-    background: linear-gradient(7deg, #10e8a0 50%, #168F66 0);
-    -webkit-background-clip: text;
-  }
-}
-
-@supports (-webkit-background-clip: text) {
-  .ulysse {
-    color: transparent;
-    background: linear-gradient(7deg, #F9E6A1 50%, #FFD532 0);
-    -webkit-background-clip: text;
-  }
 }
 
 #team_name {
@@ -91,7 +66,7 @@ body {
   font-family: futura;
   font-weight: bold;
   font-size: 7vw;
-  color: rgba(255, 191, 50, 0.5);
+  color: rgba(31, 31, 31, 0.5);
   -webkit-background-clip: text;
   -webkit-animation-name: shine;
   -webkit-animation-duration: 2s;
@@ -101,6 +76,10 @@ body {
 #olympiades_subtitle {
   font-size: 25px;
   letter-spacing: 4.5px;
+}
+
+#logo_gde {
+  height: 150px;
 }
 
 @-webkit-keyframes shine
@@ -116,7 +95,6 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
-    color: black;
     font-size: 20px;
 }
 
