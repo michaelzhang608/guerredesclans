@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   var clan_names = {
-    "R": "Clan Rouge (7-8)",
-    "B": "Clan Blanc (9-10)",
-    "N": "Clan Noir (11-12)",
-    "G": "Clan Gris (Enseignants)",
+    "R": "Clan des 7-8",
+    "B": "Clan des 9-10",
+    "N": "Clan des 11-12",
+    "G": "Clan des Enseignants",
   }
 
   var clan_colors = {
