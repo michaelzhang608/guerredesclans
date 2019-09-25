@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "R": "Clan des 7-8",
     "B": "Clan des 9-10",
     "N": "Clan des 11-12",
-    "G": "Clan des Enseignants",
+    "G": "Clan des Adultes",
   }
 
   var clan_colors = {
