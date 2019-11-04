@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   var clan_names = {
-    "R": "Clan des 7-8",
-    "B": "Clan des 9-10",
-    "N": "Clan des 11-12",
-    "G": "Clan des Adultes",
+    "R": "Volcans (7-8)",
+    "B": "Avalanches (9-10)",
+    "N": "Éclairs (11-12)",
+    "G": "Cyclones (Adultes)",
   }
 
   var clan_colors = {
