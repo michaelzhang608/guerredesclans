@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
-from utils import check_pass, read_csv, write_csv
+from utils import check_pass, read_csv, write_csv, read_file
 import time
 from datetime import datetime
 import subprocess
+from collections import Counter
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret123'
 
 @app.route("/")
 def index():
-    return render_template("index.html", points=get_points())
+    return render_template("index.html", points=get_points(), teams=get_teams())
 
 @app.route("/update_points", methods=["GET", "POST"])
 def add_points():
@@ -24,15 +25,54 @@ def add_points():
     else:
         return redirect(url_for('index'))
 
+@app.route("/add_points_team", methods=["GET", "POST"])
+def add_points_team():
+    if request.method == "POST":
+        team_id = request.form.get("team_id")
+
+        if is_production():
+            filename = "/home/guerredesclans/mysite/teams_points"
+
+        else:
+            filename = "teams_points"
+
+        with open(filename, "ab") as f:
+            f.write(f"{team_id};".encode('utf-8'))
+
+        return redirect(url_for('index'))
+    else:
+        return redirect(url_for('index'))
+
+def get_teams():
+    if is_production():
+        teams = read_csv('/home/guerredesclans/mysite/teams.csv')
+        teams_points = read_file('/home/guerredesclans/mysite/teams_points')
+    else:
+        teams = read_csv('teams.csv')
+        teams_points = read_file('teams_points')
+
+    s = ""
+    for l in teams_points:
+        s += l
+
+    c = Counter(s.split(";"))
+
+    for t in teams:
+        team_id = t[4]
+        t.insert(4, c[team_id])
+    teams.sort(key=lambda x:x[3], reverse=True)
+
+    return teams
+
 def get_points(clan=None):
     # Get points
     if is_production():
-        f = read_csv('/home/guerredesclans/mysite/db.csv')
+        points = read_csv('/home/guerredesclans/mysite/db.csv')
     else:
-        f = read_csv('db.csv')
+        points = read_csv('db.csv')
 
     # Compute percents
-    return f
+    return points
 
 def add_points_clan(change, password):
 

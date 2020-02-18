@@ -34,6 +34,13 @@ def clear_csv(filename):
     with open(filename, "r+") as f:
         f.truncate(0)
 
+def read_file(filename):
+    out = []
+    with open(filename, "r") as f:
+        for line in f:
+            out.append(line)
+    return out
+
 def get_input(prompt, is_int=False, int_range=None):
     while True:
         out = input(prompt)

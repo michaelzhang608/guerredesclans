@@ -60,13 +60,26 @@ body {
   display: none;
 }
 
-#olympiades_title {
+#guerre_des_clans_title {
   background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
   -webkit-background-size: 125px;
   font-family: futura;
   font-weight: bold;
   font-size: 7vw;
   color: rgba(31, 31, 31, 0.5);
+  -webkit-background-clip: text;
+  -webkit-animation-name: shine;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#olympiades_title {
+  background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
+  -webkit-background-size: 125px;
+  font-family: futura;
+  font-weight: bold;
+  font-size: 7vw;
+  color: rgba(235, 189, 38, 0.5);
   -webkit-background-clip: text;
   -webkit-animation-name: shine;
   -webkit-animation-duration: 2s;
