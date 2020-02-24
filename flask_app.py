@@ -60,7 +60,10 @@ def get_teams():
     for t in teams:
         team_id = t[4]
         t.insert(4, c[team_id])
-    teams.sort(key=lambda x:x[3], reverse=True)
+    try:
+        teams.sort(key=lambda x:int(x[3]), reverse=True)
+    except:
+        print("Int error")
 
     return teams
 
