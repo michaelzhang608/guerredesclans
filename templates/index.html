@@ -149,12 +149,10 @@
               <br>
               <p>Créé par Michael Zhang</p>
           </footer>
-
         </div>
-      <div id="hide">
-        {% for point in points %}
-          <p data-clan="{{ point[0] }}" data-points="{{ point[1] }}"></p>
-        {% endfor %}
-      </div>
+
+      <!-- Channel through which to pass in data from server to JS -->
+      <div id="json_data" data-data="{{ data }}"></div>
+
     </body>
 </html>

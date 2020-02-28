@@ -1,17 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for
-import os
 from utils import check_pass, read_csv, write_csv, read_file
-import time
-from datetime import datetime
-import subprocess
 from collections import Counter
+from datetime import datetime
+from random import random
+from math import log
+import subprocess
+import time
+import json
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret123'
 
 @app.route("/")
 def index():
-    return render_template("index.html", points=get_points(), teams=get_teams())
+    return render_template("index.html", data=get_data(), teams=get_teams())
 
 @app.route("/update_points", methods=["GET", "POST"])
 def add_points():
@@ -67,14 +70,24 @@ def get_teams():
 
     return teams
 
-def get_points(clan=None):
+def get_data():
+    return json.dumps({
+        "clan_points": get_clan_points(),
+    })
+
+def safe_log(n, b):
+    if n == 0:
+        return 0
+    else:
+        return int(log(n, b))
+
+def get_clan_points():
     # Get points
     if is_production():
         points = read_csv('/home/guerredesclans/mysite/db.csv')
     else:
         points = read_csv('db.csv')
 
-    # Compute percents
     return points
 
 def add_points_clan(change, password):

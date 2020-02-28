@@ -42,15 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
     "G": 'rgba(115, 115, 115, 0.8)',
   }
 
+  // Get data from html sent by server
+  var json_data = JSON.parse(document.querySelector("#json_data").dataset.data)
+
   var labels = []
   var colors = []
   var data = []
 
-  $("#hide").children().each((i, obj) => {
-    labels.push(clan_names[obj.dataset.clan])
-    colors.push(clan_colors[obj.dataset.clan])
-    data.push(obj.dataset.points)
-  })
+  for (const clan of json_data["clan_points"]) {
+    labels.push(clan_names[clan[0]])
+    colors.push(clan_colors[clan[0]])
+    data.push(clan[1])
+  }
+
   // Create chart
   var chart = document.querySelector("#myChart")
   var myChart = new Chart(chart, {
