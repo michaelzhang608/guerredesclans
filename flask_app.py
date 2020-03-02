@@ -41,6 +41,8 @@ def add_points_team():
 
         with open(filename, "ab") as f:
             f.write(f"{team_id};".encode('utf-8'))
+            f.write(f"{team_id};".encode('utf-8'))
+            f.write(f"{team_id};".encode('utf-8'))
 
         return redirect(url_for('index'))
     else:
