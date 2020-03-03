@@ -67,35 +67,56 @@
 
             <div class="row">
               <div class="col">
-                <table class="table table-dark table-striped table-info">
+                <table class="table">
                   <tr>
                     <td colspan="3">
                       <h1 id="olympiades_title">Olympiades 2020.</h1>
-                      <p id="olympiades_subtitle">COMPILATION DES POINTS EN COURS...</p>
+                      <p id="olympiades_subtitle">RÉSULATS FINALES</p>
                     </td>
                   </tr>
                   <tr>
                     <th>Équipe</th>
-                    <!-- <th>Points</th> -->
-                    <!-- <th>Likes</th> -->
-                  {% for team in teams %}
+                    <th>Points</th>
+                    <th>Likes</th>
+                  {% for team in teams[:3] %}
                   </tr>
                     <td>
                       <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
                       <span id="team_members">{{ team[2] }}</span>
                     </td>
-                    <!-- <td>{{ team[3] }} points</td> -->
-                    <!-- <td>
+                    <td>{{ team[3] }} points</td>
+                    <td>
                       <form action="/add_points_team" method="post">
                         <input type="hidden" name="team_id" value="{{ team[5] }}">
                         {{ team[4] }} likes
                         <br>
-                        <button type="submit" class="btn btn-light">Like <i class="fas fa-thumbs-up"></i></button>
+                        <!-- <button type="submit" class="btn btn-light">Like <i class="fas fa-thumbs-up"></i></button> -->
                       </form>
-                    </td> -->
+                    </td>
                   </tr>
                   {% endfor %}
                 </table>
+                <br>
+                <table class="table">
+                  {% for team in teams[3:] %}
+                  </tr>
+                    <td>
+                      <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
+                      <span id="team_members">{{ team[2] }}</span>
+                    </td>
+                    <td>{{ team[3] }} points</td>
+                    <td>
+                      <form action="/add_points_team" method="post">
+                        <input type="hidden" name="team_id" value="{{ team[5] }}">
+                        {{ team[4] }} likes
+                        <br>
+                        <!-- <button type="submit" class="btn btn-light">Like <i class="fas fa-thumbs-up"></i></button> -->
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </table>
+
                 <br>
               </div>
             </div>
