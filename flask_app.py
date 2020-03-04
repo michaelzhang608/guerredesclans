@@ -104,7 +104,7 @@ def add_points_clan(change, password):
         db_location = '/home/guerredesclans/mysite/db.csv'
 
     if check_pass(pass_location, password):
-        points = get_points()
+        points = get_clan_points()
         for p in points:
             if p[0] == change[0]:
                 print(type(p[1]))
