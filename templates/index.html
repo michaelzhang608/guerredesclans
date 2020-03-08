@@ -6,11 +6,10 @@
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134141627-1"></script>
         <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-134141627-1');
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-134141627-1');
         </script>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +17,11 @@
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-        <!--https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-        <!--fontawesome icons-->
+        <!-- Fontawesome icons -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!--Link to css file-->
         <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
@@ -31,10 +30,15 @@
         <script src="{{ url_for('static', filename='index.js') }}"></script>
         <script src="{{ url_for('static', filename='sha.min.js') }}"></script>
 
-        <!-- Link to Chart.js -->
+        <!-- Bootstrap Jquery, Bootstrap JS, and Popper -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <!-- Chart.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js" integrity="sha256-qSIshlknROr4J8GMHRlW3fGKrPki733tLq+qeMCR05Q=" crossorigin="anonymous"></script>
 
-        <!--Jquery-->
+        <!-- Jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <title>Gouvernement des Élèves</title>
@@ -65,59 +69,64 @@
               </tbody>
             </table> -->
 
-            <div class="row">
-              <div class="col">
-                <table class="table">
-                  <tr>
-                    <td colspan="3">
-                      <h1 id="olympiades_title">Olympiades 2020.</h1>
-                      <p id="olympiades_subtitle">RÉSULATS FINALES</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Équipe</th>
-                    <th>Points</th>
-                    <th>Likes</th>
-                  {% for team in teams[:3] %}
-                  </tr>
-                    <td>
-                      <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
-                      <span id="team_members">{{ team[2] }}</span>
-                    </td>
-                    <td>{{ team[3] }} points</td>
-                    <td>
-                      <form action="/add_points_team" method="post">
-                        <input type="hidden" name="team_id" value="{{ team[5] }}">
-                        {{ team[4] }} likes
-                        <br>
-                        <!-- <button type="submit" class="btn btn-light">Like <i class="fas fa-thumbs-up"></i></button> -->
-                      </form>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </table>
-                <br>
-                <table class="table">
-                  {% for team in teams[3:] %}
-                  </tr>
-                    <td>
-                      <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
-                      <span id="team_members">{{ team[2] }}</span>
-                    </td>
-                    <td>{{ team[3] }} points</td>
-                    <td>
-                      <form action="/add_points_team" method="post">
-                        <input type="hidden" name="team_id" value="{{ team[5] }}">
-                        {{ team[4] }} likes
-                        <br>
-                        <!-- <button type="submit" class="btn btn-light">Like <i class="fas fa-thumbs-up"></i></button> -->
-                      </form>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </table>
-
-                <br>
+            <button class="btn btn-info" data-toggle="collapse" data-target="#olympiadeshistory">
+              Résultats Olympiades 2020
+            </button>
+            <div class="collapse" id="olympiadeshistory">
+              <br>
+              <div class="row">
+                <div class="col">
+                  <table class="table">
+                    <tr>
+                      <td colspan="3">
+                        <h1 id="olympiades_title">Olympiades 2020.</h1>
+                        <p id="olympiades_subtitle">RÉSULATS FINALES</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Équipe</th>
+                      <th>Points</th>
+                      <th>Likes</th>
+                    {% for team in teams[:3] %}
+                    </tr>
+                      <td>
+                        <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
+                        <span id="team_members">{{ team[2] }}</span>
+                      </td>
+                      <td>{{ team[3] }} points</td>
+                      <td>
+                        <form action="/add_points_team" method="post">
+                          <input type="hidden" name="team_id" value="{{ team[5] }}">
+                          {{ team[4] }} likes
+                          <br>
+                          <!-- <button type="submit" class="btn btn-light">Like <i class="fas fa-thumbs-up"></i></button> -->
+                        </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+                  <br>
+                  <table class="table">
+                    {% for team in teams[3:] %}
+                    </tr>
+                      <td>
+                        <a href="{{ team[1] }}" id="team_name">{{ team[0] }}</a><br>
+                        <span id="team_members">{{ team[2] }}</span>
+                      </td>
+                      <td>{{ team[3] }} points</td>
+                      <td>
+                        <form action="/add_points_team" method="post">
+                          <input type="hidden" name="team_id" value="{{ team[5] }}">
+                          {{ team[4] }} likes
+                          <br>
+                          <!-- <button type="submit" class="btn btn-light">Like <i class="fas fa-thumbs-up"></i></button> -->
+                        </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+                  <br>
+                </div>
               </div>
             </div>
 
